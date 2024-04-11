@@ -6,17 +6,10 @@ import datetime
 class LeaveCreationForm(forms.ModelForm):
     reason=forms.CharField (required=False, widget=forms.Textarea(attrs={'class':'form','rows': 4, 'cols': 40}))
 	
-	
-	
-
-
 
     class Meta:
           model = Leave
           exclude = ['employee','defaultdays','hrcomments','status','is_approved','updated','created']
-
-
-   
            
 
 def clean_enddate(self):
