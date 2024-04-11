@@ -33,6 +33,13 @@ class Leave(models.Model):
 	created=models.DateTimeField(auto_now=False,auto_now_add=True)
 
 
+	def save(self, *args, **kwargs):
+		if self.startdate and self.enddate:
+			self.defaultdays -= (self.enddate-self.startdate).days
+			super(Leave, self).save(*args, **kwargs)
+         
+
+
 
 
 	class Meta:

@@ -1,30 +1,43 @@
+from typing import Any
 from django import forms
 from .models import Leave
 import datetime
+import pytz
 
 
 class LeaveCreationForm(forms.ModelForm):
-    reason=forms.CharField (required=False, widget=forms.Textarea(attrs={'class':'form','rows': 4, 'cols': 40}))
-	
+    startdate=forms.DateTimeField(widget=forms.DateInput(attrs={"type": "date",'class':'form-control'}))
+    enddate=forms.DateTimeField(widget=forms.DateInput(attrs={"type": "date",'class':'form-control'}))
+    reason=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    
+
 
     class Meta:
-          model = Leave
-          exclude = ['employee','defaultdays','hrcomments','status','is_approved','updated','created']
-           
+        model = Leave
+        exclude = ['employee','defaultdays','hrcomments','status','is_approved','updated','created']
 
-def clean_enddate(self):
-		enddate = self.cleaned_data['enddate']
-		startdate = self.cleaned_data['startdate']
-		today_date = datetime.date.today()
 
-		if (startdate or enddate) < today_date:# both dates must not be in the past
-			raise forms.ValidationError("Selected dates are incorrect,please select again")
+    def clean(self):
+        cleaned_data = super().clean()
+        enddate = cleaned_data.get('enddate')
+        startdate = cleaned_data.get('startdate')
 
-		elif startdate >= enddate:# TRUE -> FUTURE DATE > PAST DATE,FALSE other wise
-			raise forms.ValidationError("Selected dates are wrong")
-
-		return enddate
-
+        if startdate and enddate:
+            if startdate > enddate:
+                raise forms.ValidationError("check the datefield correct")
             
-   
+    def save(self, commit=True):
+            leave_request=super().save(False)
+            startdate=self.cleaned_data.get('startdate')
+            enddate=self.cleaned_data.get('enddate')
 
+            if startdate and enddate:
+              leave_request.days.used=(enddate - startdate).days +1 
+   
+              if commit:
+                leave_request.save()
+
+            return leave_request
+        
+
+   
