@@ -6,9 +6,6 @@ from django.contrib.auth.models import User
 
 
 
-
-
-
 # LOGIN USER
 def login_user(request):
     if request.method== 'POST':
@@ -17,17 +14,15 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
            login(request, user)
-           return redirect('group')
+           return redirect('/')
         else:
             return render(request, 'login.html', {})
     return render(request, 'login.html', {})
         
-
-
-# logout
+# LOGOUT USER
 def logout_user(request):
     logout(request)
-    return redirect('home')
+    return redirect('login')
 
 
 
