@@ -5,4 +5,5 @@ urlpatterns=[
        path('add-department/', views.add_department, name="department-form"),
        path('department-list/', views.department_list, name="department-table"),
        path('add-emp',views.add_employee, name="employee-form"),
+       path('emp-table',views.emp_table, name="employee-table"),
 ]

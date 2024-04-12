@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -14,7 +15,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
            login(request, user)
-           return redirect('/')
+           return redirect('dashboard')
         else:
             return render(request, 'login.html', {})
     return render(request, 'login.html', {})
@@ -23,6 +24,10 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+@login_required
+def dashbord(request):
+    return render(request,'homepage.html', {})
 
 
 

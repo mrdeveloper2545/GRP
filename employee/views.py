@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group,User
+from employee.models import Employee
 from .forms import DepartmentForm,AddEmployeeForm,UserCreationForm
 
 
@@ -26,12 +27,16 @@ def department_list(request):
 def add_employee(request):
    form=AddEmployeeForm()
    if request.method=="POST":
-       form=AddEmployeeForm(request.POST)
+       form=AddEmployeeForm(request.POST)  
        if form.is_valid():
            form.save()
-           return redirect('login')
+           return redirect('employee-form')
        else:
            form=AddEmployeeForm()
            return render(request, 'add-emp.html',{'form':form})
    return render(request, 'add-emp.html',{'form':form})
-       
+
+
+def emp_table(request):
+    employees = Employee.objects.all()
+    return render(request,'emp-table.html',{'employees':employees})

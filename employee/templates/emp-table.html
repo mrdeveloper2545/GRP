@@ -1,6 +1,4 @@
 {% extends 'index.html' %}
-
-                
 {% block content %}
 
         <!-- page content -->
@@ -8,10 +6,10 @@
           <div class="">
             <div class="row" style="display: block;">
               <div class="clearfix"></div>
-              <div class="col-md-5 col-sm-12  ">
+              <div class="col-md-8 col-sm-12  ">
                 <div class="x_panel">
                   <div class="x_title" >
-                    <h2 >{{ group.name }}</h2>
+                    <h2 >EMPLOYEE LIST</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -22,19 +20,31 @@
                             <th>
                               <input type="checkbox" id="check-all" class="flat">
                             </th>
-                           
-                            <th class="column-title"></th>
-                        
+                            
+                            <th class="column-title">NAME</th>
+                            <th class="column-title">DEPARTMENT</th>
+                            <th class="column-title">ADDRESS</th>
+                            <th class="column-title">hire_date</th>
+                            <th class="column-title">ACTION</th>
+                            <!-- <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th> -->
+                      
                           </tr>
                         </thead>
                         <tbody>
                                            
-                    {% for user in users %}
+                    {% for employee in employees %}
                           <tr class="even pointer">
                             <td class="a-center ">
                               <input type="checkbox" class="flat" name="table_records">
                             </td>
-                            <td class=" ">{{ user.username }}</td>     
+                            <td class=" ">{{ employee.employee.username }}</td> 
+                            <td class=" ">{{ employee.department.name }}</td> 
+                            <td class=" ">{{ employee.address }}</td> 
+                            <td class=" ">{{ employee.hire_date }}</td>     
+                            <th> <a href="{#}" class="btn btn-primary">VIEW</a>
+                           <a href="#" class="btn btn-danger">DELETE</a> </th>
                           </tr>
                      {% endfor %}
                         </tbody>
