@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+{% block content %}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="row" style="display: block;">
+              <div class="clearfix"></div>
+              <div class="col-md-8 col-sm-12  ">
+                <div class="x_panel">
+                  <div class="x_title" >
+                    <h2 >{{ employee.employee.username}}</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- <div class="x_content"> -->
+                   <div class="table-responsive">
+                    <div class="card card-header" style="width: 18rem;">
+                      <img src="/static/build/images/archy natural beauty.png" class="card-img-top" alt="..."></div>
+                      <table class="table">
+                        <thead class="table-dark">
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">NAME</th>
+                            <th scope="col">FIRST NAME</th>
+                            <th scope="col">LAST NAME</th>
+                            <th scope="col">ADDRESS</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">{{ employee.employee_id}}</th>
+                            <td>{{ employee.employee.username }}</td>
+                            <td>{{ employee.employee.first_name }}</td>
+                            <td>{{ employee.employee.last_name}}</td>
+                            <td>{{ employee.address}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+             
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+{% endblock %}

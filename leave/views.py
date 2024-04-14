@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
 from .forms import LeaveCreationForm
 from .models import Leave
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 # create leave
-
+@login_required
 def create_leave(request):
     form=LeaveCreationForm(request.POST)
     if request.method== "POST":

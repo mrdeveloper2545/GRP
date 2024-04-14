@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 
+
 # Create your models here.
 SICK='sick'
 EMERGANCY='emargancy'
@@ -37,11 +38,13 @@ class Leave(models.Model):
 		if self.startdate and self.enddate:
 			self.defaultdays -= (self.enddate-self.startdate).days
 			super(Leave, self).save(*args, **kwargs)
-         
 
 
 
 
+
+
+	
 	class Meta:
 		verbose_name = _('Leave')
 		verbose_name_plural = _('Leaves')
@@ -50,7 +53,14 @@ class Leave(models.Model):
 
 
 	def __str__(self):
-		return ('{0} - {1}'.format(self.leavetype,self.employee))
+		return ('{0} - {1}'.format(self.leavetype,self.employee))	
+
+
+
+
+   
+
+
 	
 
 
