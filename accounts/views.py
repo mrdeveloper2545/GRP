@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from employee.models import Employee
 
 
 
@@ -27,7 +28,8 @@ def logout_user(request):
 
 @login_required
 def dashbord(request):
-    return render(request,'homepage.html', {})
+    total_employees=Employee.objects.count()
+    return render(request,'homepage.html', {'total_employees':total_employees})
 
 
 

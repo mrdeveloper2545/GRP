@@ -147,7 +147,7 @@ def all_user(request):
     except EmptyPage:
 
         users=paginator.page(paginator.num_pages)
-    return render(request, 'user-table.html','profile.html',{'users':users})
+    return render(request, 'user-table.html',{'users':users})
 
 # delete employee
 @login_required
@@ -160,5 +160,6 @@ def delete_employee(request, pk):
 def emp_record(request, employee_id):
     employee=Employee.objects.get(id=employee_id)
     return render(request, 'emp-record.html', {'employee':employee})
+
 
 
