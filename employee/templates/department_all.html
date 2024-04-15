@@ -6,7 +6,7 @@
           <div class="">
             <div class="row" style="display: block;">
               <div class="clearfix"></div>
-              <div class="col-md-6 col-sm-12  ">
+              <div class="col-md-5 col-sm-12  offset-md-2 ">
                 <div class="x_panel">
                   <div class="x_title" >
                     <h2 >DEPARTMENT</h2>
@@ -22,7 +22,7 @@
                             </th>
                             
                             <th class="column-title">DEPARTMENT</th>
-                            <th class="column-title">ACTION</th>
+                            <!-- <th class="column-title">ACTION</th> -->
                             <!-- <th class="bulk-actions" colspan="7">
                               <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                             </th> -->
@@ -37,16 +37,39 @@
                               <input type="checkbox" class="flat" name="table_records">
                             </td>
                             <td class=" ">{{ department.name }}</td>     
-                            <td> <a href="{#}" class="btn btn-primary">VIEW</a>
-                           <a href="#" class="btn btn-danger">DELETE</a> 
+                            <!-- <td> <a href="{#}" class="btn btn-primary">VIEW</a>
+                           <a href="#" class="btn btn-danger">DELETE</a></td>  -->
                           </tr>
-                     {% endfor %}
+                    {% endfor %}
                         </tbody>
                       </table>
+                      <!-- Navigation bar with Bootstrap classes -->
+                        <nav aria-label="Page navigation ">
+                            <ul class="pagination">
+
+                      <!-- Previous page link -->
+                                <li class="page-item {% if not departments.has_previous %}disabled{% endif %}">
+                                   <a class="page-link" href="?page=1" aria-label="Previous">Previous</a>
+                                </li>
+
+                      <!-- Page links -->
+                    {% for num in departments.paginator.page_range %}
+                                <li class="page-item {% if num == departments.number %}active{% endif %}">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                    {% endfor %}
+
+                     <!-- Next page link -->
+                                <li class="page-item {% if not departments.has_next %}disabled{% endif %}">
+                                  <a class="page-link" href="?page={{ departments.paginator.num_pages }}" aria-label="Next">Next</a>
+                                </li>
+                            </ul>
+                       </nav>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </div>

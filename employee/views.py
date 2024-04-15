@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import Group,User
 from employee.models import Employee,salary
 from .forms import DepartmentForm,AddEmployeeForm,UserCreationForm,SalaryForm
@@ -18,11 +19,26 @@ def add_department(request):
     return render(request, 'department.html', {'form':form})
 
 
-# department
-@login_required
 def department_list(request):
     departments = Group.objects.all()
-    return render(request, "department_all.html", {'departments':departments})  
+    
+    # Number of items per page
+    items_per_page = 10
+    
+    paginator = Paginator(departments, items_per_page)
+    
+    page_number = request.GET.get('page')
+    
+    try:
+        departments = paginator.page(page_number)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        departments = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver last page of results.
+        departments = paginator.page(paginator.num_pages)
+    
+    return render(request, "department_all.html", {'departments': departments})
 
 
 # salary
@@ -38,10 +54,21 @@ def add_salary(request):
 
 def salary_table(request):
     salary_list=salary.objects.all()
+
+    items_per_page = 10
+
+    paginator =Paginator(salary_list, items_per_page)
+
+    page_number=request.GET.get('page')
+
+    try:
+        salary_list = paginator.page(page_number)
+    except PageNotAnInteger:     
+        salary_list=paginator.page(1)
+
+    except EmptyPage:
+        salary_list=paginator.page(paginator.num_pages)
     return render(request, 'salary-table.html',{'salary_list':salary_list})
-
-
-
 
 # create usre(staff)
 def user_creation(request):
@@ -78,6 +105,24 @@ def add_employee(request, pk):
 @login_required
 def emp_table(request):
     employees = Employee.objects.all()
+
+    items_per_page = 10
+
+    paginator = Paginator(employees, items_per_page)
+
+    page_number = request.GET.get('page')
+
+    try:
+        employees=paginator.page(page_number)
+
+    except PageNotAnInteger:
+
+        employees=paginator.page(1)
+
+    except EmptyPage:
+
+        employees = paginator.page(paginator.num_pages)
+
     return render(request,'emp-table.html',{'employees':employees})
 
 
@@ -85,7 +130,24 @@ def emp_table(request):
 @login_required
 def all_user(request):
     users=User.objects.all()
-    return render(request, 'user-table.html',{'users':users})
+
+    items_per_page = 10
+
+    paginator = Paginator(users, items_per_page)
+
+    page_number = request.GET.get('page')
+
+    try:
+        users=paginator.page(page_number)
+
+    except PageNotAnInteger:
+
+        users=paginator.page(1)
+
+    except EmptyPage:
+
+        users=paginator.page(paginator.num_pages)
+    return render(request, 'user-table.html','profile.html',{'users':users})
 
 # delete employee
 @login_required

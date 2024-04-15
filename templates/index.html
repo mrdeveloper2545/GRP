@@ -69,24 +69,56 @@
                       <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                  <!-- department -->
+                  <li><a><i class="fa fa-home"></i> department <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{% url 'department-form' %}">DEPARTMENT ADDITION FORM</a></li>
-                      <li><a href="{% url 'user-form' %}">STAFF REGISTRATION FORM</a></li>
-                      <li><a href="{% url 'employee-form' user.id %}">EMPLOYEE REGISTRATION FORM</a></li>
-                      <li><a href="{% url 'leave-form' %}">LEAVE REGISTRATION FORM</a></li>
-                      <li><a href="{% url 'salary-form' %}">SALARY FORM</a></li>
+                      <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{% url 'department-form' %}">DEPARTMENT ADDITION FORM</a></li>
+                        </ul>
+                      </li>
+                      <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{% url 'department-table' %}">ROLES</a></li>
+                        </ul>
+                      </li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                  <!-- employee management -->
+                  <li><a><i class="fa fa-home"></i> employee <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{% url 'department-table' %}">ROLES</a></li>
-                      <li><a href="{% url 'employee-table' %}">EMPLOYEE LIST</a></li>
-                      <li><a href="{% url 'user-list' %}">REGISTERED STAFF</a></li>
-                      <li><a href="{% url 'record-emp' user.id %}">RECORDS</a></li>
-                      <li><a href="{% url 'salary-table' %}">SALARY LIST</a></li>
+                      <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{% url 'user-form' %}">STAFF REGISTRATION FORM</a></li>
+                          <li><a href="{% url 'employee-form' user.id %}">EMPLOYEE REGISTRATION FORM</a></li>
+                          <li><a href="{% url 'salary-form' %}">SALARY FORM</a></li>
+                        </ul>
+                      </li>
+                      <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{% url 'employee-table' %}">EMPLOYEE LIST</a></li>
+                          <li><a href="{% url 'user-list' %}">REGISTERED STAFF</a></li>
+                          <li><a href="{% url 'record-emp' user.id %}">RECORDS</a></li>
+                          <li><a href="{% url 'salary-table' %}">SALARY LIST</a></li>
+                        </ul>
+                      </li>
                     </ul>
-                  </li> 
+                  </li>
+               <!-- leave management -->
+                  <li><a><i class="fa fa-home"></i> leave <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{% url 'leave-form' %}">LEAVE REGISTRATION FORM</a></li>
+                        </ul>
+                      </li>
+                      <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="#">ROLES</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </div>
               {% else %}
