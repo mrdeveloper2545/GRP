@@ -23,24 +23,29 @@
                             <th scope="col">NAME</th>
                             <th scope="col">FIRST NAME</th>
                             <th scope="col">LAST NAME</th>
+                            <th scope="col">EMAIL</th>
                             <th scope="col">ADDRESS</th>
                             <th scope="col">DEPARTMENT</th>
+                            <th scope="col">HIRE DATE</th>
+                            
 
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <th scope="row">{{ employee.employee_id}}</th>
+                            <th scope="row">{{ employee.id}}</th>
                             <td>{{ employee.employee.username }}</td>
                             <td>{{ employee.employee.first_name }}</td>
                             <td>{{ employee.employee.last_name}}</td>
+                            <td>{{ employee.employee.email}}</td>
                             <td>{{ employee.address}}</td>
                             <td>{{ employee.department.name }}</td>
+                            <td>{{ employee.hire_date }}</td>
                           </tr>
                         </tbody>
                       </table>
-             
-                     
+                      <a href="{% url 'update' employee.id %}" class="btn btn-success">UPDATE</a>  
+                      <a href="{% url 'update' employee.id %}" class="btn btn-secondary">UPDATE</a> 
                     </div>
                   </div>
                 </div>

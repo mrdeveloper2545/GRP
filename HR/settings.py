@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     # Apps
     'accounts',
     'employee',
-    'leave',
+    
 ]
 
 MIDDLEWARE = [

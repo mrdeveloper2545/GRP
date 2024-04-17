@@ -23,6 +23,7 @@ class Employee(models.Model):
     department=models.OneToOneField(Group, on_delete=models.CASCADE)
     address = models.CharField(max_length=50)
     hire_date = models.DateField(default=timezone.now)
+    total_leave_balance = models.IntegerField(default=0)
     
     
  

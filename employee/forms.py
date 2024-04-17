@@ -42,6 +42,7 @@ class AddEmployeeForm(forms.ModelForm):
     department=forms.ModelChoiceField(queryset=Group.objects.all(),widget=forms.Select(attrs={'class':'form-control'}))
     address=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     hire_date=forms.DateField(widget=forms.DateInput(attrs={'type':'date','class':'form-control'}))
+    total_leave=forms.IntegerField(widget=forms.NumberInput(attrs={'class':'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
     
     
@@ -49,7 +50,7 @@ class AddEmployeeForm(forms.ModelForm):
       
     class Meta:
         model = Employee
-        fields = ('employee','department', 'address','hire_date','password',)
+        fields = ('employee','department', 'address','hire_date','total_leave','password',)
 
   
     def save(self, commit=True):
@@ -65,7 +66,7 @@ class AddEmployeeForm(forms.ModelForm):
 
 class SalaryForm(forms.ModelForm):
     department=forms.ModelChoiceField(queryset=Group.objects.all(),widget=forms.Select(attrs={'class':'form-control'}))
-    amount=forms.DecimalField()
+    amount=forms.DecimalField(widget=forms.NumberInput(attrs={'class':'form-control'}))
 
     class Meta:
         model = salary
@@ -73,5 +74,11 @@ class SalaryForm(forms.ModelForm):
         fields = ['department', 'amount']
 
 
+
+        
+
+
     
+
+
 

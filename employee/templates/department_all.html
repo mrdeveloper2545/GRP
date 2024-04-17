@@ -1,15 +1,30 @@
 {% extends 'index.html' %}
 {% block content %}
 
+
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="row" style="display: block;">
-              <div class="clearfix"></div>
-              <div class="col-md-5 col-sm-12  offset-md-2 ">
+              <div class="clearfix"></div></br>
+              <div class="col-md-10 col-sm-12">
+                <!-- tag messages -->
+                        {% if messages %}
+                             {% for message in messages %}
+                    <div class=" col-sm-8 alert-success" role="alert">
+                      <h4 class="alert-heading" style="text-align: center;">{{ message }}</h4>
+                    </div>
+                   
+                              {% endfor %}
+                          {% endif %}
+
+                <!-- endtag -->
+
+
+                <div class="col-md-12 offset-md-11"><a href="{% url 'department-form' %}" class="btn btn-primary btn-primary">ADD</a></div>
                 <div class="x_panel">
                   <div class="x_title" >
-                    <h2 >DEPARTMENT</h2>
+                    <strong><h2 style="font-weight: bold;">DEPARTMENT</h2></strong>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -22,6 +37,7 @@
                             </th>
                             
                             <th class="column-title">DEPARTMENT</th>
+                            <th class="column-title">ACTION</th>
                             <!-- <th class="column-title">ACTION</th> -->
                             <!-- <th class="bulk-actions" colspan="7">
                               <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -37,8 +53,7 @@
                               <input type="checkbox" class="flat" name="table_records">
                             </td>
                             <td class=" ">{{ department.name }}</td>     
-                            <!-- <td> <a href="{#}" class="btn btn-primary">VIEW</a>
-                           <a href="#" class="btn btn-danger">DELETE</a></td>  -->
+                            <td> <a href="{% url 'delete' department.id %}" class="btn btn-danger">DELETE</a></td> 
                           </tr>
                     {% endfor %}
                         </tbody>

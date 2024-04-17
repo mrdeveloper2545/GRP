@@ -4,6 +4,7 @@ from django.contrib.auth.models import Group,User
 from employee.models import Employee,salary
 from .forms import DepartmentForm,AddEmployeeForm,UserCreationForm,SalaryForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 #  department
@@ -15,10 +16,11 @@ def add_department(request):
             department=form.cleaned_data['department']
             department = Group.objects.create(name=department)
             department.save()
+            messages.success(request, "department added successfully")
             return redirect('department-table')
     return render(request, 'department.html', {'form':form})
 
-
+@login_required
 def department_list(request):
     departments = Group.objects.all()
     
@@ -40,6 +42,12 @@ def department_list(request):
     
     return render(request, "department_all.html", {'departments': departments})
 
+@login_required
+def delete_department(request, pk):
+    department=get_object_or_404(Group, id=pk)
+    department.delete()
+    messages.success(request, "You have successfully delete department")
+    return redirect('department-table')
 
 # salary
 @login_required
@@ -51,7 +59,7 @@ def add_salary(request):
             return redirect('salary-table')
     return render(request, 'salary.html', {'form':form})
 
-
+@login_required
 def salary_table(request):
     salary_list=salary.objects.all()
 
@@ -71,6 +79,7 @@ def salary_table(request):
     return render(request, 'salary-table.html',{'salary_list':salary_list})
 
 # create usre(staff)
+@login_required
 def user_creation(request):
     form=UserCreationForm()
     if request.method=='POST':
@@ -156,10 +165,23 @@ def delete_employee(request, pk):
     delete.delete()
     return redirect('employee-table')
 
-
+#employee record
+@login_required
 def emp_record(request, employee_id):
     employee=Employee.objects.get(id=employee_id)
     return render(request, 'emp-record.html', {'employee':employee})
 
+
+def update_emp(request, pk):
+    employee=Employee.objects.get(id=pk)
+    form=AddEmployeeForm(request.POST or None, instance=employee)
+    if request.method== 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('employee-table')
+        else:
+           form=AddEmployeeForm(instance=employee)
+           return render(request, 'emp-update.html',{'form':form})
+    return render(request, 'emp-update.html',{'form':form})
 
 
