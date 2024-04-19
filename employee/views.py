@@ -174,7 +174,7 @@ def emp_record(request, employee_id):
 
 def update_emp(request, pk):
     employee=Employee.objects.get(id=pk)
-    form=AddEmployeeForm(request.POST or None, instance=employee)
+    form=AddEmployeeForm(request.POST or None,  instance=employee)
     if request.method== 'POST':
         if form.is_valid():
             form.save()

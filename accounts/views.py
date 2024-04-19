@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -30,8 +30,10 @@ def logout_user(request):
 
 @login_required
 def dashbord(request):
+    total_user=User.objects.count()
+    total_department=Group.objects.count()
     total_employees=Employee.objects.count()
-    return render(request,'homepage.html', {'total_employees':total_employees})
+    return render(request,'homepage.html', {'total_employees':total_employees, 'total_user':total_user,'total_department':total_department})
 
 @login_required
 def change_password(request):
