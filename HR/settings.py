@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Apps
     'accounts',
     'employee',
+    'leave_mgt',
     
 ]
 

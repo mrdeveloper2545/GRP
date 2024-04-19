@@ -86,7 +86,7 @@ def user_creation(request):
         form=UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('employee-table')
+            return redirect('user-list')
         else:
             form=UserCreationForm()
             return render(request, 'add-user.html',{'form':form})

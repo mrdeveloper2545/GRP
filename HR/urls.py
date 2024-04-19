@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('accounts.urls')),
     path('employee/',include('employee.urls')),
+    path('leave_mgt/', include('leave_mgt.urls')),
    
 
 
