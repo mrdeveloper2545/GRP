@@ -21,17 +21,19 @@ class UserCreationForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     email = forms.CharField(widget=forms.EmailInput(attrs={'class':'form-control'}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
+
   
     
    
     class Meta:
         model = User
-        fields = ['username','first_name','last_name','email'] 
+        fields = ['username','first_name','last_name','email','password',] 
 
 
     def save(self, commit=True):
         user=super().save(commit=False)
+        user.set_password(self.cleaned_data['password'])
         user.is_staff=True
         if commit:
             user.save()
@@ -42,20 +44,18 @@ class AddEmployeeForm(forms.ModelForm):
     department=forms.ModelChoiceField(queryset=Group.objects.all(),widget=forms.Select(attrs={'class':'form-control'}))
     address=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     hire_date=forms.DateField(widget=forms.DateInput(attrs={'type':'date','class':'form-control'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    
     
     
       
       
     class Meta:
         model = Employee
-        fields = ('employee','department', 'address','hire_date','password',)
+        fields = ('employee','department', 'address','hire_date',)
 
   
     def save(self, commit=True):
         employee=super().save(commit=False)
-        employee.employee.set_password(self.cleaned_data["password"])
-        employee.is_staff=True
         if commit:
             employee.save()
             employee.employee.groups.add(self.cleaned_data['department'])

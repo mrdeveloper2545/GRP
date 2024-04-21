@@ -5,3 +5,4 @@ from employee.models import Employee,salary
 
 admin.site.register(Employee)
 admin.site.register(salary)
+

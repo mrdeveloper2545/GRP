@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from employee.models import Employee
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from django.http import HttpResponse
+from leave.models import LeaveRequest
+
 
 
 
@@ -33,7 +34,8 @@ def dashbord(request):
     total_user=User.objects.count()
     total_department=Group.objects.count()
     total_employees=Employee.objects.count()
-    return render(request,'homepage.html', {'total_employees':total_employees, 'total_user':total_user,'total_department':total_department})
+    total_leaves=LeaveRequest.objects.count()
+    return render(request,'homepage.html', {'total_employees':total_employees, 'total_user':total_user,'total_department':total_department,'total_leaves':total_leaves})
 
 @login_required
 def change_password(request):
@@ -47,6 +49,10 @@ def change_password(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})
+
+
+
+
 
 
   

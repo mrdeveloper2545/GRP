@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     # Apps
     'accounts',
     'employee',
-    'leave_mgt',
+    'leave',
+    
     
 ]
 
@@ -94,7 +95,7 @@ WSGI_APPLICATION = 'HR.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'giti',
+        'NAME': 'mydata',
         'USER':'root',
         'HOST':'localhost',
         'PASSWORD':'MySQL123developer',

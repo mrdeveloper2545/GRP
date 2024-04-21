@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User,Group
 from django.utils import timezone
-import uuid
+
 
 # Create your models here.
 class salary(models.Model):
@@ -14,6 +14,9 @@ class salary(models.Model):
 
     def __str__(self):
         return f"{self.department.name} - ${self.amount}"  
+    
+    
+
     
 
 
