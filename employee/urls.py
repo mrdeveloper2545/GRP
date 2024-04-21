@@ -19,7 +19,7 @@ urlpatterns=[
 
 
        # employee
-       path('add-emp/<int:pk>',views.add_employee, name="employee-form"), 
+       path('add-emp/',views.add_employee, name="employee-form"), 
        path('delete-emp/<int:pk>',views.delete_employee, name="delete-emp"),
        path('emp-table/',views.emp_table, name="employee-table"),
        path('emp-record/<int:employee_id>',views.emp_record, name="record-emp"),

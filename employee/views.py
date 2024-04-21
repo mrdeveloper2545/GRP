@@ -94,20 +94,18 @@ def user_creation(request):
 
 # add employee
 @login_required
-def add_employee(request, pk):
-    current_user = get_object_or_404(User, id=pk)
-    user_form = UserCreationForm(request.POST or None, instance=current_user)
-    employee_form = AddEmployeeForm(request.POST or None)
+def add_employee(request):
+    form=AddEmployeeForm()
     if request.method == "POST":
-        if user_form.is_valid() and employee_form.is_valid():
-            user_form.save()
-            employee_form.save()
+        form = AddEmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
             return redirect('employee-table')
         else:
-            user_form = UserCreationForm(instance=current_user)
-            employee_form = AddEmployeeForm()
-        return render(request, 'add-emp.html',{'user_form':user_form, 'employee_form':employee_form})
-    return render(request, 'add-emp.html',{'user_form':user_form, 'employee_form':employee_form})
+            form = AddEmployeeForm()
+            return render(request, 'add-emp.html',{'form':form})
+    return render(request, 'add-emp.html',{'form':form})
+
 
 
 # view all employee

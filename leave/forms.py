@@ -8,5 +8,14 @@ class LeaveRequestForm(forms.ModelForm):
     model = LeaveRequest
     exclude = ['employee','defaultdays','hrcomments','status','is_approved','updated','created']
    
-    
+   def save(self, commit=True):
+     defaultdays=super().save(commit=False)
+     startdate=self.cleaned_data['startdate']
+     enddate=self.cleaned_data['enddate']
+     if enddate > startdate:
+       return defaultdays==enddate-startdate
+     else:
+       return None
+       
+           
         

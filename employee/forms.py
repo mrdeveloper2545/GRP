@@ -52,6 +52,7 @@ class AddEmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
         fields = ('employee','department', 'address','hire_date',)
+        
 
   
     def save(self, commit=True):
@@ -71,6 +72,12 @@ class SalaryForm(forms.ModelForm):
         model = salary
         verbose_name_plural = "Salaries"
         fields = ['department', 'amount']
+
+    
+
+
+
+
 
 
 
