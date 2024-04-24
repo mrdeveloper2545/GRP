@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import LeaveRequestForm
+from .forms import LeaveRequestForm,LeaveApprovalForm
 from .models import LeaveRequest
 from django.contrib import messages
+from employee.models import Employee
 
 
 
@@ -36,9 +37,20 @@ def request_table(request):
         requests=paginator.page(paginator.num_pages)
     return render (request, 'request-table.html',{'requests':requests})
 
+def leave_approved(self):
+		return self.is_approved == True
 
+def approve_leave(request, pk):
+    request=get_object_or_404(LeaveRequest, id=pk)
+    if not request.is_approved:  # Check if leave request is not already approved
+        request.status = 'approved'
+        request.is_approved = True
+        request.save()
+        return redirect('table')
+   
+    return redirect('table') 
 
-
+    
 
 
 

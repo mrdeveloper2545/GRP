@@ -41,6 +41,8 @@ class LeaveRequestForm(forms.ModelForm):
        if commit:
           leave_request.save()
        return leave_request
+    
+  
    
      
 
@@ -61,9 +63,11 @@ class LeaveRequestForm(forms.ModelForm):
 
 
 class LeaveApprovalForm(forms.ModelForm):
+    status=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     class Meta:
         model = LeaveRequest
         fields = ['status', 'is_approved']
+        
 
        
            

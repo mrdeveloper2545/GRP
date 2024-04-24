@@ -50,9 +50,28 @@ class LeaveRequest(models.Model):
            self.defaultdays = (self.enddate - self.startdate).days + 1
         super(LeaveRequest, self).save()
 
+       
+
     def __str__(self):
         return self.employee.username
     
+
+
+    def approve(self):
+       if not self.is_approved:
+           self.is_approved == True
+           self.status ='approved'
+           self.save()
+        
+
+   
+
+
+
+
+    
+
+
 
 
 

@@ -47,7 +47,7 @@
                             <td class="badge badge-success" style="background-color:rgb(21, 172, 34); font-size: 14px;">{{ request.status }}</td>                
                             <td class=" ">{{ request.created }}</td>
                             <td class=" ">{{ request.updated }}</td>
-                            <td> <a href="#" class="btn btn-primary">VIEW</a>
+                            <td> <a href="{% url 'approve' request.id %}" class="btn btn-primary">approve</a>
                            <a href="#" class="btn btn-danger">DELETE</a></td> 
                           </tr>
                      {% endfor %}
