@@ -156,6 +156,9 @@ def all_user(request):
         users=paginator.page(paginator.num_pages)
     return render(request, 'user-table.html',{'users':users})
 
+
+
+
 # delete employee
 @login_required
 def delete_employee(request, pk):

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from dateutil.parser import parse
 
 # Create your models here.
 
@@ -43,6 +44,20 @@ class LeaveRequest(models.Model):
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
+
+    def save(self):
+        if self.startdate and self.enddate:
+           self.defaultdays = (self.enddate - self.startdate).days + 1
+        super(LeaveRequest, self).save()
+
     def __str__(self):
         return self.employee.username
+    
+
+
+
+
+
+
+
 

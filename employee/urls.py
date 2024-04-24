@@ -16,6 +16,7 @@ urlpatterns=[
        # user
        path('add-user/',views.user_creation, name="user-form"),
        path('all-users/',views.all_user, name="user-list"),
+    
 
 
        # employee

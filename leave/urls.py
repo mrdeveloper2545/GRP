@@ -5,5 +5,7 @@ from . import views
 urlpatterns=[
     path('leave/',views.leaverequest, name="add-request"),
     path('request-all/',views.request_table, name="table"),
+    path('approve/<int:id>/',views.approve_leave,name='userleaveapprove'),
+
    
 ]
