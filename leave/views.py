@@ -3,7 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import LeaveRequestForm
 from .models import LeaveRequest
 from django.contrib import messages
-from employee.models import Employee
+
 
 
 # Create your views here.
@@ -38,16 +38,7 @@ def request_table(request):
 
 
 
-def approve_leave(request,id):
-	if not (request.user.is_superuser and request.user.is_authenticated):
-		return redirect('/')
-	leave = get_object_or_404(LeaveRequest, id = id)
-	user = leave.user
-	employee = Employee.objects.filter(user = user)[0]
-	leave.approve_leave
 
-	messages.error(request,'Leave successfully approved for {0}'.format(employee.get_full_name),extra_tags = 'alert alert-success alert-dismissible show')
-	return redirect('dashboard:userleaveview', id = id)
 
 
 
