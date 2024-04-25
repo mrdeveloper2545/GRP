@@ -19,6 +19,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
            login(request, user)
+           messages.error(request, 'please provide the credential inforamation')
            return redirect('dashboard')
         else:
             return render(request, 'login.html', {})
@@ -42,10 +43,9 @@ def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)
+            form.save()
             messages.success(request, 'You have successfully change password now you can log in with your new password')  # Important to update the session with the new password hash
-            return redirect('login')  # Redirect to a success page
+            return redirect('login') 
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})

@@ -62,6 +62,9 @@ class LeaveRequest(models.Model):
            self.is_approved == True
            self.status ='approved'
            self.save()
+
+
+   
         
 
    

@@ -48,7 +48,7 @@
                             <td class=" ">{{ request.created }}</td>
                             <td class=" ">{{ request.updated }}</td>
                             <td> <a href="{% url 'approve' request.id %}" class="btn btn-primary">approve</a>
-                           <a href="#" class="btn btn-danger">DELETE</a></td> 
+                           <a href="{% url 'reject' request.id %}" class="btn btn-danger">reject</a></td> 
                           </tr>
                      {% endfor %}
                         </tbody>
